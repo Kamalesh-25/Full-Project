@@ -1,0 +1,9 @@
+com\example\BookStore\controller\BookController.class
+com\example\BookStore\model\Book.class
+com\example\BookStore\repository\OrderRepository.class
+com\example\BookStore\repository\UserRepository.class
+com\example\BookStore\BookStoreApplication.class
+com\example\BookStore\model\Orders.class
+com\example\BookStore\model\User.class
+com\example\BookStore\service\BookService.class
+com\example\BookStore\repository\BookRepository.class

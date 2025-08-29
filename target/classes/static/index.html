@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 Online Bookstore</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>📚 Online Bookstore</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="orders.html">My Orders</a>
+      <a href="login.html" id="loginBtn">Login</a>
+    </nav>
+    <div class="toggle-switch">
+      <input type="checkbox" id="modeToggle" />
+      <label for="modeToggle" class="slider"></label>
+    </div>
+  </header>
+
+<section class="filters">
+  <input type="text" id="searchInput" placeholder="Search books by title..." />
+  <button id="addBookBtn">➕ Add Book</button>
+</section>
+
+
+  <main id="book-container"></main>
+
+  <!-- Book Detail Popup -->
+  <div id="popup" class="popup hidden">
+    <div id="popup-content" class="popup-content"></div>
+  </div>
+
+<script src="js/main.js" defer></script>
+<script>
+  const toggleCheckbox = document.getElementById('modeToggle');
+  const body = document.body;
+
+  // Load saved mode from localStorage
+  if (localStorage.getItem('mode') === 'light') {
+    body.classList.add('light-mode');
+    toggleCheckbox.checked = true;
+  }
+
+  toggleCheckbox.addEventListener('change', () => {
+    body.classList.toggle('light-mode');
+
+    if (body.classList.contains('light-mode')) {
+      localStorage.setItem('mode', 'light');
+    } else {
+      localStorage.setItem('mode', 'dark');
+    }
+  });
+</script>
+
+</body>
+</html>
