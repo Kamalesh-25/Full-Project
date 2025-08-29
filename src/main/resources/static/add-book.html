@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Book</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add New Book</h2>
+    <form id="addBookForm">
+      <input type="text" id="title" name="title" placeholder="Book Title" required>
+      <input type="text" id="author" name="author" placeholder="Author" required>
+      <input type="text" id="category" name="category" placeholder="Category" required>
+      <input type="number" id="price" name="price" placeholder="Price" required>
+      <textarea id="description" name="description" placeholder="Description (optional)"></textarea>
+      <button type="submit">Add Book</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const addBookForm = document.getElementById("addBookForm");
+
+  const role = localStorage.getItem("role");
+  const userId = localStorage.getItem("userId");
+
+  if (role.toLocaleLowerCase() !== "admin") {
+    alert("Only admin can access this page.");
+    window.location.href = "index.html";
+    return;
+  }
+
+  addBookForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const category = document.getElementById("category").value;
+    const description = document.getElementById("description").value;
+    const price = document.getElementById("price").value;
+
+    fetch("http://localhost:8080/books/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        userId,
+        title,
+        author,
+        category,
+        description,
+        price
+      })
+    })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg);
+        window.location.href = "index.html";
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong!");
+      });
+  });
+});
+
+  </script>
+</body>
+</html>
